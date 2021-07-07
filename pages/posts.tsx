@@ -9,8 +9,7 @@ type Props = {
   allPosts: Post[]
 }
 
-const Index: React.FC<Props> = ({ allPosts }) => {
-  const latestPosts = allPosts.slice(0, 1)
+const Posts: React.FC<Props> = ({ allPosts }) => {
   return (
     <>
       <Layout>
@@ -22,7 +21,7 @@ const Index: React.FC<Props> = ({ allPosts }) => {
   )
 }
 
-export default Index
+export default Posts
 
 type AllPostsStaticProps = {
   props: { allPosts: Items[] }

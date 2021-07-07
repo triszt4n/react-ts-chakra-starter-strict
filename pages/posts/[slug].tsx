@@ -1,16 +1,16 @@
 import ErrorPage from 'next/error'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import Container from '../../components/container'
-import Header from '../../components/header'
-import Layout from '../../components/layout'
-import PostBody from '../../components/post-body'
-import PostHeader from '../../components/post-header'
-import PostTitle from '../../components/post-title'
-import { getAllPosts, getPostBySlug } from '../../lib/api'
-import { CMS_NAME } from '../../lib/constants'
-import markdownToHtml from '../../lib/markdownToHtml'
-import PostType from '../../types/post'
+import React from 'react'
+import Container from '~components/common/container'
+import Header from '~components/common/header'
+import Layout from '~components/common/layout'
+import PostBody from '~components/post/post-body'
+import PostHeader from '~components/post/post-header'
+import PostTitle from '~components/post/post-title'
+import { getAllPosts, getPostBySlug, Items } from '~lib/api'
+import markdownToHtml from '~lib/markdownToHtml'
+import PostType from '~types/post'
 
 type Props = {
   post: PostType
@@ -18,13 +18,13 @@ type Props = {
   preview?: boolean
 }
 
-const Post = ({ post, morePosts, preview }: Props) => {
+const Post: React.FC<Props> = ({ post, morePosts, preview }) => {
   const router = useRouter()
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />
   }
   return (
-    <Layout preview={preview}>
+    <Layout>
       <Container>
         <Header />
         {router.isFallback ? (
@@ -33,17 +33,10 @@ const Post = ({ post, morePosts, preview }: Props) => {
           <>
             <article className="mb-32">
               <Head>
-                <title>
-                  {post.title} | Next.js Blog Example with {CMS_NAME}
-                </title>
+                <title>{post.title} | Next.js Blog Example</title>
                 <meta property="og:image" content={post.ogImage.url} />
               </Head>
-              <PostHeader
-                title={post.title}
-                coverImage={post.coverImage}
-                date={post.date}
-                author={post.author}
-              />
+              <PostHeader title={post.title} coverImage={post.coverImage} date={post.date} />
               <PostBody content={post.content} />
             </article>
           </>
@@ -61,39 +54,38 @@ type Params = {
   }
 }
 
-export async function getStaticProps({ params }: Params) {
-  const post = getPostBySlug(params.slug, [
-    'title',
-    'date',
-    'slug',
-    'author',
-    'content',
-    'ogImage',
-    'coverImage',
-  ])
+type PostStaticProps = {
+  props: {
+    post: Items & { content: string }
+  }
+}
+
+export const getStaticProps = async ({ params }: Params): Promise<PostStaticProps> => {
+  const post = getPostBySlug(params.slug, ['title', 'date', 'slug', 'author', 'content', 'ogImage', 'coverImage'])
   const content = await markdownToHtml(post.content || '')
 
   return {
     props: {
       post: {
         ...post,
-        content,
-      },
-    },
+        content
+      }
+    }
   }
 }
 
-export async function getStaticPaths() {
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export const getStaticPaths = async () => {
   const posts = getAllPosts(['slug'])
 
   return {
-    paths: posts.map((posts) => {
+    paths: posts.map((post) => {
       return {
         params: {
-          slug: posts.slug,
-        },
+          slug: post.slug
+        }
       }
     }),
-    fallback: false,
+    fallback: false
   }
 }

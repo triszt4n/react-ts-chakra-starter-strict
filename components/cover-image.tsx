@@ -1,5 +1,5 @@
-import cn from 'classnames'
 import Link from 'next/link'
+import React from 'react'
 
 type Props = {
   title: string
@@ -7,21 +7,14 @@ type Props = {
   slug?: string
 }
 
-const CoverImage = ({ title, src, slug }: Props) => {
-  const image = (
-    <img
-      src={src}
-      alt={`Cover Image for ${title}`}
-      className={cn('shadow-small', {
-        'hover:shadow-medium transition-shadow duration-200': slug,
-      })}
-    />
-  )
+const CoverImage: React.FC<Props> = ({ title, src, slug }) => {
+  // eslint-disable-next-line @next/next/no-img-element
+  const image = <img src={src} alt={title} /* layout="responsive" placeholder="blur" width={1024} height={1024} */ />
   return (
     <div className="sm:mx-0">
       {slug ? (
         <Link as={`/posts/${slug}`} href="/posts/[slug]">
-          <a aria-label={title}>{image}</a>
+          {image}
         </Link>
       ) : (
         image

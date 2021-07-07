@@ -15,9 +15,11 @@
     "isolatedModules": true,
     "baseUrl": ".",
     "paths": {
-      "~assets/*": ["assets/*"],
+      "~assets/*": ["public/assets/*"],
       "~types/*": ["types/*"],
-      "~components/*": ["components/*"]
+      "~components/*": ["components/*"],
+      "~lib/*": ["lib/*"],
+      "~styles/*": ["styles/*"]
     }
   },
   "exclude": ["node_modules"],

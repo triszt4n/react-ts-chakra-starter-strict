@@ -1,6 +1,19 @@
+import { ChakraProvider } from '@chakra-ui/react'
+import '@fontsource/ubuntu/300.css'
+import '@fontsource/ubuntu/400.css'
+import '@fontsource/ubuntu/500.css'
+import '@fontsource/ubuntu/700.css'
 import { AppProps } from 'next/app'
-import '../styles/index.css'
+import React from 'react'
+import myTheme from '~styles/myTheme'
 
-export default function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
+  return (
+    <ChakraProvider theme={myTheme}>
+      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+      <Component {...pageProps} />
+    </ChakraProvider>
+  )
 }
+
+export default MyApp

@@ -4,10 +4,10 @@
 
 ## Tech
 
-* Next.js
-* Remark
-* TailwindCSS 2.0
-* Yarn
+- Next.js
+- Remark
+- Chakra UI
+- Yarn
 
 ## Development
 
