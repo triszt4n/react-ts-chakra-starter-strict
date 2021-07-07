@@ -1,6 +1,6 @@
 # Triszt4n's blog
 
-[![Vercel](https://therealsujitk-vercel-badge.vercel.app/?app=blog-triszt4n&style=for-the-badge)](blog-triszt4n.vercel.app)
+[![Vercel](https://therealsujitk-vercel-badge.vercel.app/?app=blog-triszt4n)](https://blog-triszt4n.vercel.app/)
 
 ## Tech
 

@@ -2,6 +2,7 @@ import React from 'react'
 import Container from '~components/common/container'
 import Layout from '~components/common/layout'
 import Intro from '~components/intro'
+import PuzzleAnimation from '~components/puzzle-animation'
 import { getAllPosts, Items } from '~lib/api'
 import Post from '~types/post'
 
@@ -16,6 +17,7 @@ const Index: React.FC<Props> = ({ allPosts }) => {
       <Layout>
         <Container>
           <Intro />
+          <PuzzleAnimation text="This page is under construction!" />
         </Container>
       </Layout>
     </>
@@ -29,7 +31,7 @@ type AllPostsStaticProps = {
 }
 
 export const getStaticProps = async (): Promise<AllPostsStaticProps> => {
-  const allPosts = getAllPosts(['title', 'date', 'slug', 'author', 'coverImage', 'excerpt'])
+  const allPosts = getAllPosts(['title', 'date', 'slug', 'coverImage', 'excerpt'])
 
   return {
     props: { allPosts }

@@ -1,9 +1,9 @@
+import { Flex } from '@chakra-ui/react'
 import ErrorPage from 'next/error'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React from 'react'
 import Container from '~components/common/container'
-import Header from '~components/common/header'
 import Layout from '~components/common/layout'
 import PostBody from '~components/post/post-body'
 import PostHeader from '~components/post/post-header'
@@ -15,10 +15,9 @@ import PostType from '~types/post'
 type Props = {
   post: PostType
   morePosts: PostType[]
-  preview?: boolean
 }
 
-const Post: React.FC<Props> = ({ post, morePosts, preview }) => {
+const Post: React.FC<Props> = ({ post, morePosts }) => {
   const router = useRouter()
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />
@@ -26,19 +25,18 @@ const Post: React.FC<Props> = ({ post, morePosts, preview }) => {
   return (
     <Layout>
       <Container>
-        <Header />
         {router.isFallback ? (
           <PostTitle>Loading…</PostTitle>
         ) : (
           <>
-            <article className="mb-32">
-              <Head>
-                <title>{post.title} | Next.js Blog Example</title>
-                <meta property="og:image" content={post.ogImage.url} />
-              </Head>
+            <Head>
+              <title>{post.title} | triszt4n</title>
+              <meta property="og:image" content={post.ogImage.url} />
+            </Head>
+            <Flex direction="column" as="article" mb={4}>
               <PostHeader title={post.title} coverImage={post.coverImage} date={post.date} />
               <PostBody content={post.content} />
-            </article>
+            </Flex>
           </>
         )}
       </Container>
@@ -61,7 +59,16 @@ type PostStaticProps = {
 }
 
 export const getStaticProps = async ({ params }: Params): Promise<PostStaticProps> => {
-  const post = getPostBySlug(params.slug, ['title', 'date', 'slug', 'author', 'content', 'ogImage', 'coverImage'])
+  const post = getPostBySlug(params.slug, [
+    'title',
+    'date',
+    'slug',
+    'content',
+    'ogImage',
+    'coverImage',
+    'comment',
+    'db'
+  ])
   const content = await markdownToHtml(post.content || '')
 
   return {

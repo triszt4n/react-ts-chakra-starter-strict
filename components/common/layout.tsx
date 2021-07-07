@@ -14,7 +14,7 @@ const Layout: React.FC<Props> = ({ background, children }) => {
       <Meta />
       <Flex direction="column" minHeight="100vh">
         <Navbar />
-        <Box background={background} flex={1} pb={20}>
+        <Box background={background} flex={1} pb={24}>
           {children}
         </Box>
         <Footer />

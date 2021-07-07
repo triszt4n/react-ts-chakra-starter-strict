@@ -8,6 +8,7 @@ type PostType = {
     url: string
   }
   content: string
+  db?: boolean
 }
 
 export default PostType
