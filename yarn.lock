@@ -753,10 +753,10 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@fontsource/ubuntu@4.5.0":
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/@fontsource/ubuntu/-/ubuntu-4.5.0.tgz#13700f2e34b8dead9c935850e5ef26add9e70cc9"
-  integrity sha512-PytR+FgXPPK+UNrLNhYucrNXewS9b4YOJpS2oYw4dfJq+5iyG8iV6CfwToy2UOVSOmBSBhCQ6mJa5Z6BqrGqMw==
+"@fontsource/ubuntu@4.5.11":
+  version "4.5.11"
+  resolved "https://registry.yarnpkg.com/@fontsource/ubuntu/-/ubuntu-4.5.11.tgz#71b75fda2f4b14aa20b39a7a3c8bc34c81fde609"
+  integrity sha512-c+B8A8r31hJLk8Ek7Svoz4GwjtInhc60LFM6XTr5TKtZbcct8TPNxJuKX4+hnqoWgcvy8s0Gj4mde4TcK/SgDQ==
 
 "@hapi/accept@5.0.2":
   version "5.0.2"
